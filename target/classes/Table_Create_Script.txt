@@ -1,0 +1,28 @@
+
+Create Table USERS (
+  ID VARCHAR2(8) PRIMARY KEY,
+  PASSWORD VARCHAR2(8),
+  NAME VARCHAR2(20),
+  ROLE VARCHAR2(20)
+);
+drop table users;
+
+SELECT * FROM USERS;
+
+INSERT INTO USERS VALUES ('admin', '1234', '관리자','Admin');
+insert into users values('user1','1234','홍길동','User');
+
+create table Board(
+  SEQ number(5) primary key,
+  TITLE varchar2(200),
+  WRITER varchar2(20),
+  CONTENT varchar2(2000),
+  REGDATE date default sysdate,
+  CNT number(5) default 0
+);
+
+insert into board(seq, title, writer, content) values(1, '가입인사', '관리자', '잘 부탁드립니다.');
+
+SELECT * FROM board;
+
+commit;
