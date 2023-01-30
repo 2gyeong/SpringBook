@@ -1,7 +1,10 @@
-package com.spring.board;
+package com.spring.common;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+
+import com.spring.board.BoardDTO;
+import com.spring.board.BoardService;
 
 public class Client_Test_getboard {
 
