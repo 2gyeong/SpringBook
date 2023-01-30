@@ -4,27 +4,27 @@ import java.sql.Date;
 
 public class BoardDTO {
 	
-	// DTO (VO) : DBÀÇ Å×ÀÌºíÀÇ °¢ ÄÃ·³ÀÌ¸§À» ¸ÅÇÎ
-		// µ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¼­ Àü´ŞÇØÁÖ´Â Áß°£ÀÚ ¿ªÇÒ
-		// ¸ğµç º¯¼ö´Â private ·Î ¼±¾ğ
-		// getter/setter¸¦ »ç¿ëÇØ¼­ º¯¼öÀÇ °ªÀ» ÇÒ´ç, °¡Áö°í ¿È
-		// ±âº» »ı¼ºÀÚ¸¦ ¹İµå½Ã »ı¼ºÇÔ, BoardDTO(){}
-		// toString ¸Ş¼Òµå¸¦ ÀçÁ¤ÀÇ : °´Ã¼ ÀÚÃ¼¸¦ Ãâ·ÂÇßÀ» ¶§ ±× °´Ã¼ÀÇ º¯¼ö°ªÀ» È®ÀÎ
-		// lombok À» »ç¿ëÇÏ¸é, ¾î³ëÅ×ÀÌ¼ÇÀ» »ç¿ëÇØ¼­ getter/setter, toString, ±âº» »ı¼ºÀÚ¸¦ ÀÚµ¿À¸·Î ¸¸µé¾îÁØ´Ù.
+	//DTO (VO) : DBì˜ í…Œì´ë¸”ì˜ ê° ì»¬ëŸ¼ ì´ë¦„ì„ ë§¤í•‘
+		// ë°ì´í„°ë¥¼ ë°›ì•„ì„œ ì „ë‹¬í•´ì£¼ëŠ” ì¤‘ê°„ì ì—­í™œ 
+		// ëª¨ë“  ë³€ìˆ˜ëŠ” private ë¡œ ì„ ì–¸ 
+		// getter/setterë¥¼ ì‚¬ìš©í•´ì„œ ë³€ìˆ˜ì˜ ê°’ì„ í• ë‹¹, ê°€ì§€ê³  ì˜´ 
+		// ê¸°ë³¸ ìƒì„±ìë¥¼ ë°˜ë“œì‹œ ìƒì„±í•¨ , BoardDTO() {}
+		// toString ë©”ì†Œë“œë¥¼ ì¬ì •ì˜ : ê°ì²´ ìì²´ë¥¼ ì¶œë ¥í–ˆì„ë•Œ ê·¸ ê°ì²´ì˜ ë³€ìˆ˜ê°’ì„ í™•ì¸ 
+		// lombok ë¥¼ ì‚¬ìš©í•˜ë©´, ì–´ë…¸í…Œì´ì…˜ì„ ì‚¬ìš©í•´ì„œ getter/setter, toString, ê¸°ë³¸ìƒì„±ì ë¥¼ ìë™ìœ¼ë¡œ ë§Œë“¤ì–´ì¤€ë‹¤. 
 	
-	private int seq;
-	private String title;
-	private String writer;
+	private int seq; 
+	private String title; 
+	private String writer; 
 	private String content;
-	private Date regDate; // java.sql.Date
-	private int cnt;
+	private Date regDate; 		//java.sql.Date 
+	private int cnt; 
 	
-	// ±âº» »ı¼ºÀÚ¸¦ Ãß°¡
+	//ê¸°ë³¸ ìƒì„±ìë¥¼ ì¶”ê°€ 
 	public BoardDTO() {}
-
-	//getter/setter	<== ¸ğµç º¯¼ö°¡ privateÀÌ¹Ç·Î ¿ÜºÎ¿¡¼­ Á¢±Ù ±İÁöµÊ. getter/setter¸¦ ÅëÇØ¼­ °ª ÇÒ´ç.
-	//art+shift+s
 	
+	//getter/setter  <== ëª¨ë“  ë³€ìˆ˜ê°€ private ì´ë¯€ë¡œ ì™¸ë¶€ì—ì„œ ì ‘ê·¼ ê¸ˆì§€ë¨, getter/setterë¥¼ í†µí•´ì„œ ê°’í• ë‹¹.
+	//Art+Shift+S
+
 	public int getSeq() {
 		return seq;
 	}
@@ -72,9 +72,11 @@ public class BoardDTO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+
 	
-	//toStirng() : °´Ã¼ ÀÚÃ¼¸¦ Ãâ·ÂÇÒ ¶§ °´Ã¼ ¸Ş¸ğ¸®ÀÇ °ªÀ» Ãâ·ÂÇÏµµ·Ï ÀçÁ¤ÀÇ
-	// ±âº»ÀûÀ¸·Î´Â °´Ã¼ÀÇ ¹øÁö¼ö¸¦ Ãâ·Â (hash ÄÚµå)
+	
+	//toString () : ê°ì²´ìì²´ë¥¼ ì¶œë ¥ í• ë•Œ ê°ì²´ì˜ ë©”ëª¨ë¦¬ì˜ ê°’ì„ ì¶œë ¥ í•˜ë„ë¡ ì¬ì •ì˜ 
+	// ê¸°ë³¸ì ìœ¼ë¡œëŠ” ê°ì²´ì˜ ë²ˆì§€ìˆ˜ë¥¼ ì¶œë ¥ (hash ì½”íŠ¸) 
 	
 	@Override
 	public String toString() {
@@ -83,8 +85,4 @@ public class BoardDTO {
 	}
 	
 
-	
-	
-	
-	
 }

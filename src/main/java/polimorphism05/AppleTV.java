@@ -17,13 +17,13 @@ public class AppleTV implements TV {
 
 	@Override
 	public void powerOn() {
-		System.out.println("AppleTV - Àü¿øÀ» ÄÕ´Ï´Ù.");
+		System.out.println("AppleTV - ì „ì›ì„ ì¼­ë‹ˆë‹¤.");
 
 	}
 
 	@Override
 	public void powerOff() {
-		System.out.println("AppleTV - Àü¿øÀ» ²ü´Ï´Ù.");
+		System.out.println("AppleTV - ì „ì›ì„ ë•ë‹ˆë‹¤.");
 
 	}
 

@@ -6,104 +6,107 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class JDBCUtil {
-		// DB¸¦ ¿¬°á ¼³Á¤ÇÏ´Â Å¬·¡½º 
-	// 1.DB¸¦ ¿¬°áÇÏ´Â ¸Ş¼Òµå
-		// static : °´Ã¼ »ı¼º¾øÀÌ Å¬·¡½º ÀÌ¸§À¸·Î ¹Ù·Î È£Ãâ
+		//DBë¥¼ ì—°ê²° ì„¤ì •í•˜ëŠ” í´ë˜ìŠ¤ 
+	//1. DBë¥¼ ì—°ê²°í•˜ëŠ” ë©”ì†Œë“œ 
+		//static : ê°ì²´ ìƒì„± ì—†ì´ í´ë˜ìŠ¤ì´ë¦„ìœ¼ë¡œ ë°”ë¡œ í˜¸ì¶œ 
 	public static Connection getConnection() {
-		// String driver = "oracle.jdbc.driver.OracleDriver";
-		String driver = "oracle.jdbc.driver.OracleDriver";
-		// String url = "jdbc:oracle:thin:@localhost:1521:XE";
-		String url = "jdbc:oracle:thin:@localhost:1521:XE";
-
-		Connection conn = null;
+		
+		//String driver = "oracle.jdbc.driver.OracleDriver";
+		//String driver = "org.h2.Driver";
+		String url = "jdbc:oracle:thin:@localhost:1521:XE"; 
+		//String url = "jdbc:h2:tcp://localhost/~/test"; 
+		
+		Connection conn = null; 
 		
 		try {
-			Class.forName(driver);
+			//Class.forName(driver);
 			conn = DriverManager.getConnection(url,"C##HR","1234");
 			//conn = DriverManager.getConnection(url,"sa","");
-			System.out.println("DB¿¡ Àß ¿¬°áµÇ¾ú½À´Ï´Ù."); // È®ÀÎ ÈÄ ÁÖ¼®Ã³¸®
-			return conn;
-		} catch (Exception e) {
+			
+			System.out.println(" DBì— ì˜ ì—°ê²° ë˜ì—ˆìŠµë‹ˆë‹¤. ");   //í™•ì¸í›„ ì£¼ì„ ì²˜ë¦¬ 
+			return conn; 
+			
+		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("DB ¿¬°á¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+			System.out.println(" DB ì—°ê²°ì— ì‹¤íŒ¨ í–ˆìŠµë‹ˆë‹¤.");
 		}
-		return null;
-	}
-		
-	
-	// 2. DB¿¬°áÀ» Á¦°ÅÇÏ´Â ¸Ş¼Òµå : Connection, Statement °´Ã¼¸¦ Á¦°Å
-			// Insert, Update, Delete 
-									// 			, Ä¿³Ø¼Ç °´Ã¼
-	public static void close(PreparedStatement pstmt, Connection conn) {
-		if(pstmt != null) {
-			try {
-				if(!pstmt.isClosed()) {	//pstmt °´Ã¼°¡ Á¦°ÅµÇÁö ¾Ê´Â »óÅÂ¶ó¸é
-					pstmt.close();
-					
-				}
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				conn = null;
-			}
-		
-		if(conn != null) {
-			try {
-				if(!conn.isClosed()){
-					conn.close();
-				}
-			}catch(Exception e) {
-				
-			}finally {
-				conn = null;
-			}
-		}
-			
-		}
+		return null; 
 	}
 	
-	// 3. DB¿¬°áÀ» Á¦°ÅÇÏ´Â ¸Ş¼Òµå : Connection, PreparedStatement, ResultSet °´Ã¼¸¦ Á¦°Å
-		//Select 
-	public static void close(ResultSet rs, PreparedStatement pstmt, Connection conn) {
-		
-		if(rs != null) {
+	
+	//2. DBì—°ê²°ì„ ì œê±°í•˜ëŠ” ë©”ì†Œë“œ : Connection, PreparedStatement ê°ì²´ë¥¼ ì œê±° 
+		//Insert, Update, Delete 
+	public static void close (PreparedStatement pstmt, Connection conn) {
+		if (pstmt != null) {
 			try {
-				if(!rs.isClosed()) {	//pstmt °´Ã¼°¡ Á¦°ÅµÇÁö ¾Ê´Â »óÅÂ¶ó¸é
+				if (!pstmt.isClosed()) {	//pstmt ê°ì²´ê°€ ì œê±°ë˜ì§€ ì•ŠëŠ” ìƒíƒœë¼ë©´
 					pstmt.close();
-					
+					System.out.println("pstmt ê°ì²´ close()");
 				}
-			}catch(Exception e) {
+			}catch (Exception e) {
 				e.printStackTrace();
 			}finally {
-				rs = null;
+				pstmt = null; 
 			}
+		}
 		
-		if(pstmt != null) {
+		if (conn != null) {
 			try {
-				if(!pstmt.isClosed()) {	//pstmt °´Ã¼°¡ Á¦°ÅµÇÁö ¾Ê´Â »óÅÂ¶ó¸é
-					pstmt.close();
-					
-				}
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				conn = null;
-			}
-		
-		if(conn != null) {
-			try {
-				if(!conn.isClosed()){
+				if (!conn.isClosed()) {
 					conn.close();
+					System.out.println("conn ê°ì²´ close()");
 				}
-			}catch(Exception e) {
-				
+			}catch (Exception e) {
+				e.printStackTrace();
 			}finally {
-				conn = null;
+				conn = null; 
 			}
-		}
-			
-		}
-		}
-		}
-	}
 
+		}
+	}
+	
+	//3. DBì—°ê²°ì„ ì œê±°í•˜ëŠ” ë©”ì†Œë“œ : Connection, PreparedStatement, ResultSet ê°ì²´ë¥¼ ì œê±° 
+		//Select 
+	public static void close (ResultSet rs, PreparedStatement pstmt, Connection conn) {
+		if (rs != null) {
+			try {
+				if (!rs.isClosed()) {	//pstmt ê°ì²´ê°€ ì œê±°ë˜ì§€ ì•ŠëŠ” ìƒíƒœë¼ë©´
+					rs.close();
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				rs = null; 
+			}
+		}
+		
+		
+		
+		if (pstmt != null) {
+			try {
+				if (!pstmt.isClosed()) {	//pstmt ê°ì²´ê°€ ì œê±°ë˜ì§€ ì•ŠëŠ” ìƒíƒœë¼ë©´
+					pstmt.close();
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				pstmt = null; 
+			}
+		}
+		
+		if (conn != null) {
+			try {
+				if (!conn.isClosed()) {
+					conn.close();
+				}
+			}catch (Exception e) {
+				
+			}finally {
+				conn = null; 
+			}
+
+		}
+	}
+	
+
+}
