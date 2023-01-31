@@ -1,4 +1,4 @@
-package com.spring.common;
+package com.spring.test;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;

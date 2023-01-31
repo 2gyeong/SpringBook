@@ -1,4 +1,6 @@
-package com.spring.common;
+package com.spring.test;
+
+import java.util.List;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -6,7 +8,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import com.spring.board.BoardDTO;
 import com.spring.board.BoardService;
 
-public class Client_Test_delete {
+public class Client_Test_getboardList {
 
 	public static void main(String[] args) {
 		AbstractApplicationContext factory =
@@ -18,13 +20,13 @@ public class Client_Test_delete {
 		//DTO 객체를 생성 후에 Setter 주입으로 DTO 각 필드의 값을 입력
 		BoardDTO boardDTO = new BoardDTO();
 		
-		// deleteBoard() 메소드 테스트
+		// List<BoardDTO>	리턴을 받아온다.
 		
-		// DTO에 seq 컬럼의 값을 할당 후 deleteBoard() 메소드 호출
-		boardDTO.setSeq(5);
+		List<BoardDTO> boardList = boardService.getBoardList(boardDTO);
 		
-		// deleteBoard(boardDTO)
-		boardService.deleteBoard(boardDTO);
+		for(BoardDTO board : boardList) {
+			System.out.println(board);
+		}
 
 	}
 
