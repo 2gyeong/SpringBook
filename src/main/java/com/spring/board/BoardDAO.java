@@ -76,6 +76,7 @@ public class BoardDAO {
 		try {
 			// 객체 생성
 			conn = JDBCUtil.getConnection();
+			// BOARD_UPDATE = "update board set title=?, content=? where seq=?
 			pstmt = conn.prepareStatement(BOARD_UPDATE);
 			
 			//pstmt의 ?에 dto에서 넘어오는 변수값 할당.
@@ -126,6 +127,7 @@ public class BoardDAO {
 		try {
 			//객체 생성 : Connection, PrepareStatement
 			conn = JDBCUtil.getConnection();
+			// select * from board where seq=?
 			pstmt = conn.prepareStatement(BOARD_GET);
 			pstmt.setInt(1, dto.getSeq());
 			
@@ -169,6 +171,7 @@ public class BoardDAO {
 		BoardDTO board ; 
 		
 		try {
+			
 			conn = JDBCUtil.getConnection();
 			//BOARD_LIST = "select * from board order by seq desc";
 			pstmt = conn.prepareStatement(BOARD_LIST);

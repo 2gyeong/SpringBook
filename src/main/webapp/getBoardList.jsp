@@ -63,7 +63,12 @@ List<BoardDTO> boardList = (List) session.getAttribute("boardList");
 		
 		<tr>
 			<td> <%= dto.getSeq() %> </td>
-			<td> <%= dto.getTitle() %></td>
+			
+			<!-- 공백 조심 -->
+			<td> <a href="getBoard.do?seq=<%= dto.getSeq() %>">
+				<%= dto.getTitle() %>
+				</a>
+			</td>
 			<td> <%= dto.getWriter()%> </td>
 			<td> <%= dto.getRegDate() %></td>
 			<td> <%= dto.getCnt() %></td>
