@@ -1,14 +1,18 @@
 package com.spring.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.spring.board.BoardDAO;
 import com.spring.board.BoardDTO;
 import com.spring.users.UserDAO;
 import com.spring.users.UserDTO;
@@ -50,6 +54,10 @@ public class DispatcherServlet extends HttpServlet {
 		
 		
 		//1. 클라이언트의 요청 path 정보를 추출 한다. 
+		String url = request.getRequestURL().toString();
+		//StringBuffer url = request.getRequestURL();
+			System.out.println("url : "+url);
+		
 		String uri = request.getRequestURI(); 		///boardweb/getBoardList.do
 			System.out.println("uri : " + uri);
 		
@@ -88,11 +96,11 @@ public class DispatcherServlet extends HttpServlet {
 			
 			
 			// DB의 클라이언트에서 넘긴 ID와 Password를 select 해서 그 값을 DTO에 담아서 리턴
-			System.out.println(userD.getId()); // 출력 test
+			System.out.println(userD); // 출력 test
 			
 		// D. 백엔드의 로직을 모두 처리 후 View 페이지로 이동
-			if(userD.getId() != null) { // 클라이언트에게 전송한 ID와 Pass가 DB의 값과 일치할때
-				response.sendRedirect("getBoardList.jsp");
+			if(userD != null) { // 클라이언트에게 전송한 ID와 Pass가 DB의 값과 일치할때
+				response.sendRedirect("getBoardList.do");
 				System.out.println("아이디와 패스워드 일치");
 			}else { // client에게 전송한 ID와 Password 중 일치하지 않을 때 null
 				response.sendRedirect("login.jsp"); 
@@ -102,6 +110,28 @@ public class DispatcherServlet extends HttpServlet {
 		}else if (path.equals("/getBoardList.do")) {
 			
 			System.out.println("게시판 정보 출력 ");
+			
+			// 1. Client 로 부터 /getBoardList.do 요청을 받음. (게시판 정보를 출력해 달라고 요청)
+			
+			// 2. 비즈니스 로직 처리
+			BoardDTO dto = new BoardDTO();
+			BoardDAO dao = new BoardDAO();
+			
+			//boardList 에는 DB에서 쿼리한 레코드를 담은 DTO객체가 내장
+			List<BoardDTO> boardList = dao.getBoardList(dto);
+			
+			
+			// 3. 클라이언트에게 boardList를 전달해야 한다.
+			//(세션 객체에 boardList 객체를 담아서 전송)
+			// 세션은 서버의 RAM에 저장됨.
+			// 쿠키 : 클라이언트 시스템의 HDD에 정보를 저장함.
+			HttpSession session = request.getSession();
+			//session 객체에 값을 저장, setAttribute("변수명", 객체);
+			//session 객체에 값을 가지고 올 때, getAttribute("변수명");
+			session.setAttribute("boardList", boardList);
+			
+			// 4. 뷰 페이지로 이동
+			response.sendRedirect("getBoardList.jsp");
 			
 		}else if (path.equals("/logout.do")) {
 			

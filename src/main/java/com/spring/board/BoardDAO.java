@@ -166,17 +166,18 @@ public class BoardDAO {
 			// Vector : 멀티쓰레드 환경
 			// LinkedList : 자주 수정, 삭제 시 성능이 빠름
 		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
-		BoardDTO board ;
+		BoardDTO board ; 
 		
 		try {
 			conn = JDBCUtil.getConnection();
+			//BOARD_LIST = "select * from board order by seq desc";
 			pstmt = conn.prepareStatement(BOARD_LIST);
 			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				do {
-					
+					// DTO 객체는 여기서 생성해야 함.(별도의 객체에 담기게 됨.)
 					board = new BoardDTO(); // 각각의 객체 생성
 					
 					//rs에서 가져온 1개의 레코드를 board(DTO)
@@ -189,6 +190,7 @@ public class BoardDAO {
 					
 					// boardList : ArrayList에 add() 메소드를 사용해서 board(DTO)를 저장
 					boardList.add(board);
+					
 				} while(rs.next());
 			}else {
 				System.out.println("테이블에 레코드가 비어 있습니다.");
