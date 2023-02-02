@@ -120,7 +120,7 @@ public class BoardDAO {
 	
 	// 3-4. 글 조회 처리 메소드 : getBoard() : 레코드 1개를 DB에서 select해서 DTO 객체에 담아서 리턴
 	public BoardDTO getBoard(BoardDTO dto) {
-		System.out.println("==> JDBC로 updateBoard() 기능 처리 - 시작");
+		System.out.println("==> JDBC로 getBoard() 기능 처리 - 시작");
 		
 		//리턴으로 돌려줄 변수 선언 : try 블락 밖에서 선언
 		BoardDTO board = new BoardDTO();

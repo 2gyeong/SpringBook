@@ -27,7 +27,7 @@
 		<input type="hidden" name="seq" value= "<%= board.getSeq() %>">
 		<table border="1" cellspacing="0" cellpadding="0">
 			<tr>
-				<td bgcolor="orange" width="70"> 글 번호 </td>
+				<td bgcolor="orange" width="70"> 글 제목 </td>
 				<td><input type="text" name="title" value= "<%= board.getTitle() %>"></td>
 			</tr>
 			
