@@ -1,4 +1,4 @@
-package com.spring.common;
+package com.spring.test;
 
 import java.sql.Connection;
 
@@ -7,6 +7,7 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.spring.board.BoardDTO;
 import com.spring.board.BoardService;
+import com.spring.common.JDBCUtil;
 
 public class Client_test1 {
 	public static void main(String[] args) {
